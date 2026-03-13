@@ -1,6 +1,6 @@
 # Guia de estudio - Capitulo 6
 
-Guia de estudio y preparacion para la evaluacion del Capitulo 6 de la tesis de maestria: **Extension no lineal mediante computacion de reservorio estructurado**.
+Guia de estudio y preparacion para la evaluacion del Capitulo 6: **Extension no lineal mediante computacion de reservorio estructurado**.
 
 ## Contenido
 
@@ -13,7 +13,7 @@ Guia de estudio y preparacion para la evaluacion del Capitulo 6 de la tesis de m
 
 ## Ver en linea
 
-[Abrir guia](https://norsab.github.io/guia-tesis-cap6/)
+[Abrir guia](https://norsab.github.io/guia-estudio-cap6/)
 
 ## Uso local
 
