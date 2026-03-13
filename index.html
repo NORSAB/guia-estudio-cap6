@@ -218,21 +218,23 @@
 
 <div class="toc">
   <ol>
-    <li>Conceptos clave con analogias</li>
-    <li>Arquitectura: que cambia y que se mantiene</li>
-    <li>Resultados experimentales</li>
-    <li>Interpretacion de figuras clave</li>
-    <li>Preguntas de evaluacion: fundamentos</li>
-    <li>Preguntas de evaluacion: estabilidad y NNLS</li>
-    <li>Preguntas de evaluacion: diseno experimental</li>
-    <li>Preguntas de evaluacion: optimizacion y espacios</li>
-    <li>Puntos criticos y frases de respuesta</li>
+    <li><a href="#s1" style="color: var(--accent); text-decoration: none;">Conceptos clave con analogias</a></li>
+    <li><a href="#s2" style="color: var(--accent); text-decoration: none;">Arquitectura: que cambia y que se mantiene</a></li>
+    <li><a href="#s3" style="color: var(--accent); text-decoration: none;">Resultados experimentales</a></li>
+    <li><a href="#s4" style="color: var(--accent); text-decoration: none;">Interpretacion de figuras clave</a></li>
+    <li><a href="#s5" style="color: var(--accent); text-decoration: none;">Preguntas de evaluacion: fundamentos</a></li>
+    <li><a href="#s6" style="color: var(--accent); text-decoration: none;">Preguntas de evaluacion: estabilidad y NNLS</a></li>
+    <li><a href="#s7" style="color: var(--accent); text-decoration: none;">Preguntas de evaluacion: diseno experimental</a></li>
+    <li><a href="#s8" style="color: var(--accent); text-decoration: none;">Preguntas de evaluacion: optimizacion y espacios</a></li>
+    <li><a href="#s9" style="color: var(--accent); text-decoration: none;">Puntos criticos y frases de respuesta</a></li>
+    <li><a href="#s10" style="color: var(--accent); text-decoration: none;">Contribuciones: que es propio y que es de la literatura</a></li>
+    <li><a href="#s11" style="color: var(--accent); text-decoration: none;">Parrafos de apertura para la defensa</a></li>
   </ol>
 </div>
 
 
 <!-- ============================================================ -->
-<h2>1. Conceptos clave con analogias</h2>
+<h2 id="s1">1. Conceptos clave con analogias</h2>
 <!-- ============================================================ -->
 
 <div class="concept-box">
@@ -368,7 +370,7 @@
 
 
 <!-- ============================================================ -->
-<h2 class="page-break">2. Arquitectura: que cambia respecto al modelo anterior</h2>
+<h2 class="page-break" id="s2">2. Arquitectura: que cambia respecto al modelo anterior</h2>
 <!-- ============================================================ -->
 
 <div class="figure-container">
@@ -387,7 +389,7 @@
 
 
 <!-- ============================================================ -->
-<h2 class="page-break">3. Resultados experimentales</h2>
+<h2 class="page-break" id="s3">3. Resultados experimentales</h2>
 <!-- ============================================================ -->
 
 <h3>3.1 Verificaciones teoricas</h3>
@@ -457,7 +459,7 @@
 
 
 <!-- ============================================================ -->
-<h2 class="page-break">4. Interpretacion de figuras clave</h2>
+<h2 class="page-break" id="s4">4. Interpretacion de figuras clave</h2>
 <!-- ============================================================ -->
 
 <p>Estas dos figuras responden a una pregunta central: ¿el reservorio (SSRC) "entiende" los regimenes economicos que K-Means encontro? La respuesta es si, y estas figuras lo demuestran visualmente.</p>
@@ -596,7 +598,7 @@
 
 
 <!-- ============================================================ -->
-<h2 class="page-break">5. Preguntas de evaluacion: fundamentos</h2>
+<h2 class="page-break" id="s5">5. Preguntas de evaluacion: fundamentos</h2>
 <!-- ============================================================ -->
 
 <div class="qa-block">
@@ -640,7 +642,7 @@
 
 
 <!-- ============================================================ -->
-<h2 class="page-break">6. Preguntas de evaluacion: estabilidad y NNLS</h2>
+<h2 class="page-break" id="s6">6. Preguntas de evaluacion: estabilidad y NNLS</h2>
 <!-- ============================================================ -->
 
 <div class="qa-block">
@@ -665,7 +667,7 @@
 
 
 <!-- ============================================================ -->
-<h2>7. Preguntas de evaluacion: diseno experimental</h2>
+<h2 id="s7">7. Preguntas de evaluacion: diseno experimental</h2>
 <!-- ============================================================ -->
 
 <div class="qa-block">
@@ -694,7 +696,7 @@
 
 
 <!-- ============================================================ -->
-<h2 class="page-break">8. Preguntas de evaluacion: optimizacion y espacios</h2>
+<h2 class="page-break" id="s8">8. Preguntas de evaluacion: optimizacion y espacios</h2>
 <!-- ============================================================ -->
 
 <div class="qa-block">
@@ -769,7 +771,7 @@
 
 
 <!-- ============================================================ -->
-<h2 class="page-break">9. Puntos criticos y frases de respuesta</h2>
+<h2 class="page-break" id="s9">9. Puntos criticos y frases de respuesta</h2>
 <!-- ============================================================ -->
 
 <h3>Los 5 temas de mayor riesgo</h3>
@@ -795,6 +797,56 @@
 <h3>Ante preguntas dificiles</h3>
 
 <p>Si la pregunta toca un punto sin respuesta exacta, reformular en terminos de operadores o geometria convexa. Reconocer limitaciones con propuestas de trabajo futuro siempre es mejor que intentar justificar algo que no se sostiene.</p>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break" id="s10">10. Contribuciones: que es propio y que es de la literatura</h2>
+<!-- ============================================================ -->
+
+<p>Es fundamental tener claro que conceptos vienen de la literatura y cuales son contribucion original. Esta tabla lo resume:</p>
+
+<table>
+  <tr><th>Concepto</th><th>Autor</th><th>Ano</th></tr>
+  <tr><td>Echo State Network (ESN)</td><td>Herbert Jaeger</td><td>2001</td></tr>
+  <tr><td>Echo State Property (ESP)</td><td>Herbert Jaeger</td><td>2001</td></tr>
+  <tr><td>Leaky-ESN</td><td>Jaeger / Lukosevicius</td><td>~2009</td></tr>
+  <tr><td>Aproximacion Universal de ESN</td><td>Grigoryeva y Ortega</td><td>2018</td></tr>
+  <tr><td>SSRC (concepto)</td><td>Banegas y Vides</td><td>2025</td></tr>
+  <tr style="background: #dbeafe;"><td><strong>Teorema de Inclusion (TCROC-Markov como subconjunto de SSRC)</strong></td><td><strong>Contribucion propia</strong></td><td><strong>2026</strong></td></tr>
+  <tr style="background: #dbeafe;"><td><strong>Aplicacion empirica a combustibles hondurenos con NNLS</strong></td><td><strong>Contribucion propia</strong></td><td><strong>2026</strong></td></tr>
+  <tr style="background: #dbeafe;"><td><strong>Jerarquia formal de modelos (lineal a no lineal)</strong></td><td><strong>Contribucion propia</strong></td><td><strong>2026</strong></td></tr>
+</table>
+
+<div class="key-point">
+  La contribucion no es inventar el reservorio. Es demostrar que el modelo TCROC-Markov es un caso particular del SSRC (Teorema de Inclusion), mostrar empiricamente que la extension no lineal mejora 20-23%, y formalizar la jerarquia completa bajo un framework unificado.
+</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break" id="s11">11. Parrafos de apertura para la defensa</h2>
+<!-- ============================================================ -->
+
+<p>Estos parrafos estan listos para usar al presentar el Capitulo 6. Pueden leerse tal cual o adaptarse al estilo propio.</p>
+
+<div class="concept-box">
+  <div class="title">Para abrir la presentacion del Capitulo 6</div>
+  <p>"El Capitulo 5 demostro que el marco TCROC-Markov identifica regimenes economicos interpretables y supera a los benchmarks. Sin embargo, es un modelo lineal. En el Capitulo 6 demostramos formalmente que este modelo lineal es un caso particular de una arquitectura mas general, el Computador de Reservorio Estructurado Estocastico, y mostramos empiricamente que la extension no lineal reduce el error predictivo entre un 20 y un 23 por ciento."</p>
+</div>
+
+<div class="concept-box">
+  <div class="title">Para presentar el Teorema de Inclusion</div>
+  <p>"El resultado central del capitulo es el Teorema de Inclusion, que demuestra que al configurar el reservorio con matriz interna nula, activacion identidad y factor de fuga unitario, se recupera exactamente el modelo TCROC-Markov del capitulo anterior. Esto establece una jerarquia formal: el modelo lineal es un caso degenerado del no lineal, lo que garantiza que la extension nunca puede ser peor."</p>
+</div>
+
+<div class="concept-box">
+  <div class="title">Para presentar las Figuras 6.12 y 6.13</div>
+  <p>"Estas figuras demuestran que el reservorio, a pesar de operar en un espacio de 150 dimensiones sin informacion explicita de regimenes, organiza internamente los estados de forma que los regimenes economicos quedan separados. Ademas, la relacion entre el retorno TCROC y la activacion del reservorio es monotona y no lineal, lo que confirma que la extension SSRC captura estructura que el modelo Markoviano lineal no puede representar."</p>
+</div>
+
+<div class="concept-box">
+  <div class="title">Para cerrar el capitulo</div>
+  <p>"En sintesis, el Capitulo 6 cumple un doble proposito. Primero, establece una relacion formal de inclusion entre los dos paradigmas de prediccion utilizados en la tesis. Segundo, demuestra que la generalizacion no lineal produce mejoras consistentes y estadisticamente significativas en tres de las cuatro series analizadas, con una reduccion promedio del error del 21 por ciento."</p>
+</div>
 
 </body>
 </html>
