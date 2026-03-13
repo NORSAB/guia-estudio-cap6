@@ -173,6 +173,36 @@
 
   .page-break { page-break-before: always; }
 
+  .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin: 10px 0; }
+  .flow-box { font-family: 'Inter', sans-serif; font-size: 9pt; padding: 6px 10px; border-radius: 4px; text-align: center; }
+  .flow-box.input { background: #dbeafe; border: 1px solid #93c5fd; }
+  .flow-box.process { background: #fef3c7; border: 1px solid #fcd34d; }
+  .flow-box.output { background: #d1fae5; border: 1px solid #6ee7b7; }
+  .flow-box.loop { background: #ede9fe; border: 1px solid #c4b5fd; font-size: 8pt; }
+  .flow-arrow { font-family: 'Inter', sans-serif; font-size: 14pt; color: var(--muted); }
+
+  .tanh-svg { width: 100%; max-width: 300px; margin: 8px auto; display: block; }
+
+  .esp-compare { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .esp-card { flex: 1; min-width: 140px; padding: 8px 10px; border-radius: 4px; font-size: 10pt; }
+  .esp-card.bad { background: #fee2e2; border: 1px solid #fca5a5; }
+  .esp-card.good { background: #d1fae5; border: 1px solid #6ee7b7; }
+  .esp-card strong { display: block; font-family: 'Inter', sans-serif; font-size: 9pt; margin-bottom: 3px; }
+
+  .eq-block { background: var(--light-bg); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; margin: 8px 0; font-size: 10pt; overflow-x: auto; }
+  .eq-block .eq-label { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 9pt; color: var(--accent); margin-bottom: 3px; }
+  .eq-block code { font-family: 'Courier New', monospace; font-size: 9.5pt; word-break: break-all; }
+  .eq-block .eq-parts { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; font-size: 9pt; }
+  .eq-block .eq-part { padding: 2px 6px; border-radius: 3px; }
+  .eq-block .eq-part.memory { background: #dbeafe; }
+  .eq-block .eq-part.new { background: #fef3c7; }
+
+  .inclusion-box { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
+  .inclusion-item { font-family: 'Inter', sans-serif; text-align: center; padding: 8px 14px; border-radius: 4px; font-size: 10pt; }
+  .inclusion-item.particular { background: #dbeafe; border: 1px solid #93c5fd; }
+  .inclusion-item.general { background: #fef3c7; border: 1px solid #fcd34d; }
+  .inclusion-item small { display: block; font-size: 8pt; color: var(--muted); }
+
   @media print {
     body { padding: 0; }
     .page-break { page-break-before: always; }
@@ -208,13 +238,20 @@
 <div class="concept-box">
   <div class="title">Las 3 matrices del reservorio (W_in, W_res, W_out)</div>
   <p>El reservorio funciona como una fabrica con 3 etapas:</p>
-<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 8px; border-radius: 4px; margin: 8px 0;">
-   ENTRADA          FABRICA (150 maquinas)           SALIDA
-   -------          ----------------------           ------
-   u_t  -->  W_in  -->  h_t (procesado) -->  W_out  -->  y_t+1
-                         |          |
-                         +-- W_res --+  (las maquinas se hablan entre si)
-</pre>
+  <div class="flow-diagram">
+    <div class="flow-box input">u_t<small>entrada</small></div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-box process">W_in<small>150 &times; 1</small></div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-box process">h_t<small>estado (150 dim)</small></div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-box process">W_out<small>1 &times; 150</small></div>
+    <span class="flow-arrow">&rarr;</span>
+    <div class="flow-box output">y&#770;_t+1<small>prediccion</small></div>
+  </div>
+  <div style="text-align: center; margin: 4px 0;">
+    <div class="flow-box loop">W_res (150 &times; 150) &mdash; las neuronas se hablan entre si, retroalimentando h_t</div>
+  </div>
   <table>
     <tr><th>Matriz</th><th>Tamano</th><th>Se entrena</th><th>Que hace</th></tr>
     <tr><td>W_in</td><td>150 x 1</td><td>No, fija</td><td>Puerta de entrada. Toma el unico dato de la semana (alfa_t) y lo reparte entre las 150 neuronas. Como 1 manguera repartida en 150 cubetas.</td></tr>
@@ -237,18 +274,17 @@
 <div class="concept-box">
   <div class="title">La tanh (tangente hiperbolica)</div>
   <p>Funcion que aplasta cualquier numero al rango [-1, +1]:</p>
-<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 8px; border-radius: 4px; margin: 8px 0;">
-    +1 - - - - - - - - - - - - -
-                         ........
-                    ....
-                  ..
-     0 - - - -.- - - - - - - - -
-             ..
-           ..
-      ....
-    ......
-    -1 - - - - - - - - - - - - -
-</pre>
+  <svg class="tanh-svg" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+    <line x1="10" y1="60" x2="190" y2="60" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="100" y1="10" x2="100" y2="110" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="10" y1="15" x2="190" y2="15" stroke="#d1d5db" stroke-width="0.5" stroke-dasharray="4"/>
+    <line x1="10" y1="105" x2="190" y2="105" stroke="#d1d5db" stroke-width="0.5" stroke-dasharray="4"/>
+    <path d="M 10,104 Q 40,103 60,98 Q 75,90 85,75 Q 95,55 100,60 Q 105,45 115,30 Q 125,20 140,17 Q 160,15 190,15" fill="none" stroke="#2c5282" stroke-width="2.5"/>
+    <text x="193" y="18" font-size="9" fill="#555">+1</text>
+    <text x="193" y="108" font-size="9" fill="#555">-1</text>
+    <text x="193" y="63" font-size="9" fill="#555">0</text>
+    <text x="80" y="8" font-size="8" font-family="Inter, sans-serif" fill="#2c5282">tanh(x)</text>
+  </svg>
   <p>Se usa por 3 razones:</p>
   <p>1. Acota los valores. Sin tanh, los numeros podrian explotar al multiplicarse repetidamente por W_res. La tanh los mantiene siempre entre -1 y +1.</p>
   <p>2. Introduce no-linealidad. Sin ella, multiplicar matrices una y otra vez da resultado lineal. La tanh permite capturar relaciones curvas (la curvatura de la Figura 6.13).</p>
@@ -266,15 +302,16 @@
 <div class="concept-box">
   <div class="title">Propiedad de estado de eco (ESP)</div>
   <p>Garantia de que el reservorio "olvida" de donde empezo. No importa la condicion inicial h_0; despues de unos pasos la salida depende SOLO de los datos de entrada.</p>
-<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 6px; border-radius: 4px; margin: 6px 0;">
-Sin ESP:  El color final del agua depende de si el vaso tenia agua
-          limpia o sucia ANTES. El resultado cambia segun como
-          inicializaste. MALO.
-
-Con ESP:  No importa si el vaso tenia agua limpia o sucia.
-          Despues de remover bastante, el color depende SOLO
-          de cuanta tinta echaste. Resultado reproducible. BUENO.
-</pre>
+  <div class="esp-compare">
+    <div class="esp-card bad">
+      <strong>Sin ESP</strong>
+      El color final del agua depende de si el vaso tenia agua limpia o sucia ANTES. El resultado cambia segun como inicializaste.
+    </div>
+    <div class="esp-card good">
+      <strong>Con ESP</strong>
+      No importa si el vaso tenia agua limpia o sucia. Despues de remover bastante, el color depende SOLO de cuanta tinta echaste. Resultado reproducible.
+    </div>
+  </div>
   <p>Formalmente: para cualesquiera dos condiciones iniciales h_0 y h'_0, la diferencia ||h_t - h'_t|| tiende a 0 cuando t tiende a infinito.</p>
   <p>Se garantiza con una condicion simple: rho(W_res) menor que 1. Esto hace que la influencia de h_0 decaiga exponencialmente. Los rho optimos en la tesis son 0.70-0.85, bien por debajo de 1.</p>
   <div class="analogy">Dos personas entran a un rio por puntos distintos. Si la corriente es fuerte (rho menor que 1), ambas terminan siguiendo el mismo cauce. El punto de entrada ya no importa.</div>
@@ -283,13 +320,18 @@ Con ESP:  No importa si el vaso tenia agua limpia o sucia.
 <div class="concept-box">
   <div class="title">Leaky-ESN (integracion de fuga)</div>
   <p>ESN con memoria controlable. En vez de reaccionar 100% al dato nuevo, el reservorio mezcla lo nuevo con su estado anterior:</p>
-<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 6px; border-radius: 4px; margin: 6px 0;">
-ESN estandar:   h_t =         tanh(W_in * u_t + W_res * h_{t-1})
-
-Leaky-ESN:      h_t = (1-a) * h_{t-1}  +  a * tanh(W_in * u_t + W_res * h_{t-1})
-                       --------------      ---------------------------------------
-                       "lo que recuerdo"    "lo nuevo que proceso"
-</pre>
+  <div class="eq-block">
+    <div class="eq-label">ESN estandar:</div>
+    <code>h_t = tanh(W_in &middot; u_t + W_res &middot; h_{t-1})</code>
+  </div>
+  <div class="eq-block">
+    <div class="eq-label">Leaky-ESN:</div>
+    <code>h_t = (1-a) &middot; h_{t-1} + a &middot; tanh(W_in &middot; u_t + W_res &middot; h_{t-1})</code>
+    <div class="eq-parts">
+      <span class="eq-part memory">(1-a) &middot; h_{t-1} = "lo que recuerdo"</span>
+      <span class="eq-part new">a &middot; tanh(...) = "lo nuevo que proceso"</span>
+    </div>
+  </div>
   <table>
     <tr><th>Valor de a</th><th>Comportamiento</th><th>Analogia</th></tr>
     <tr><td>a = 1.0</td><td>ESN estandar. 100% reaccion nueva</td><td>Espejo: refleja solo lo que tiene enfrente AHORA</td></tr>
@@ -309,10 +351,11 @@ Leaky-ESN:      h_t = (1-a) * h_{t-1}  +  a * tanh(W_in * u_t + W_res * h_{t-1})
 <div class="concept-box">
   <div class="title">Teorema de inclusion: TCROC-Markov como caso particular</div>
   <p>Resultado central del capitulo. Si en el SSRC fijamos la matriz del reservorio en cero, la activacion en identidad y la fuga en 1, recuperamos exactamente el modelo Markoviano del capitulo anterior:</p>
-<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 6px; border-radius: 4px; margin: 6px 0;">
-TCROC-Markov  C  TCROC-SSRC
-(caso particular)   (caso general)
-</pre>
+  <div class="inclusion-box">
+    <div class="inclusion-item particular">TCROC-Markov<small>caso particular</small></div>
+    <span style="font-size: 16pt; font-weight: 600;">&sub;</span>
+    <div class="inclusion-item general">TCROC-SSRC<small>caso general</small></div>
+  </div>
   <p>Es una identidad algebraica verificada con error 0.0 en las cuatro series. No 0.00001, no 10^{-15}... cero exacto.</p>
   <div class="analogy">Un cuadrado es un caso particular de un rectangulo. TCROC-Markov es el SSRC "plano", sin curvatura no lineal. Al activar la curvatura (tanh, rho mayor que 0), ganamos expresividad.</div>
 </div>
@@ -494,19 +537,19 @@ TCROC-Markov  C  TCROC-SSRC
 
 <p>La pregunta que responde: ¿el reservorio reacciona de forma coherente a los cambios de precio? Para entender el patron, este es el esquema:</p>
 
-<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: var(--light-bg); padding: 10px; border-radius: 4px; margin: 10px 0;">
-   Activacion
-   del reservorio
-        |
-        |      ... Regimen 3 (Alza)      &lt;-- activacion POSITIVA
-        |    ...
-        |  ..
-   0 ---|---.-----------------------------&gt; alfa_t (retorno TCROC)
-        | ..
-        |... Regimen 1 (Caida)           &lt;-- activacion NEGATIVA
-        |.
-        v
-</pre>
+  <svg style="width: 100%; max-width: 360px; display: block; margin: 10px auto;" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="90" x2="300" y2="90" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="40" y1="20" x2="40" y2="160" stroke="#d1d5db" stroke-width="1"/>
+    <path d="M 50,150 Q 80,145 120,130 Q 160,100 200,60 Q 240,35 280,25" fill="none" stroke="#2c5282" stroke-width="2.5"/>
+    <text x="220" y="45" font-size="9" font-family="Inter, sans-serif" fill="#16a34a">Regimen 3 (Alza)</text>
+    <text x="55" y="148" font-size="9" font-family="Inter, sans-serif" fill="#dc2626">Regimen 1 (Caida)</text>
+    <text x="140" y="82" font-size="9" font-family="Inter, sans-serif" fill="#ca8a04">Regimen 2 (Estable)</text>
+    <text x="270" y="105" font-size="8" fill="#555">alfa_t</text>
+    <text x="4" y="25" font-size="7" fill="#555">Activacion</text>
+    <text x="35" y="93" font-size="8" fill="#555">0</text>
+    <text x="25" y="25" font-size="8" fill="#555">+</text>
+    <text x="27" y="158" font-size="8" fill="#555">&minus;</text>
+  </svg>
 
 <h3>Los 3 hallazgos clave</h3>
 
@@ -518,11 +561,10 @@ TCROC-Markov  C  TCROC-SSRC
 
 <p>La curvatura viene de la funcion tanh() dentro del reservorio:</p>
 
-<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: var(--light-bg); padding: 8px; border-radius: 4px; margin: 8px 0;">
-h_t = (1-a) * h_{t-1} + a * tanh(W_in * alfa_t + W_res * h_{t-1})
-                              ^^^^
-                              Esta es la fuente de la curvatura
-</pre>
+  <div class="eq-block">
+    <code>h_t = (1-a) &middot; h_{t-1} + a &middot; <strong style="color: #2c5282; background: #dbeafe; padding: 1px 4px; border-radius: 3px;">tanh</strong>(W_in &middot; alfa_t + W_res &middot; h_{t-1})</code>
+    <div style="font-size: 9pt; color: var(--accent); margin-top: 4px;">tanh = fuente de la curvatura y de la mejora del 20-23%</div>
+  </div>
 
 <div class="key-point">
   Diesel muestra la curvatura mas pronunciada (mayor beneficio de la extension no lineal).<br>
