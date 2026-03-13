@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de estudio - Capitulo 6: Reservorios</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --text: #1a1a2e;
+    --muted: #555;
+    --accent: #2c5282;
+    --light-bg: #f7f8fa;
+    --border: #d1d5db;
+    --section-bg: #eef2f7;
+  }
+
+  @page { size: letter; margin: 18mm 16mm; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 11.5pt;
+    line-height: 1.6;
+    color: var(--text);
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 16mm 18mm;
+    background: white;
+  }
+
+  h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 19pt;
+    font-weight: 600;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 24px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 3px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5pt;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 16px;
+    margin-bottom: 5px;
+    page-break-after: avoid;
+  }
+
+  p { margin-bottom: 8px; text-align: justify; }
+
+  .qa-block {
+    margin-bottom: 18px;
+    page-break-inside: avoid;
+  }
+
+  .question {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 10.5pt;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .key-point {
+    background: var(--section-bg);
+    border-left: 3px solid var(--accent);
+    padding: 6px 10px;
+    margin: 8px 0;
+    font-size: 10.5pt;
+  }
+
+  .concept-box {
+    background: var(--light-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+
+  .concept-box .title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 10.5pt;
+    margin-bottom: 4px;
+  }
+
+  .analogy {
+    background: #fefce8;
+    border-left: 3px solid #ca8a04;
+    padding: 6px 10px;
+    margin: 8px 0;
+    font-style: italic;
+    font-size: 10.5pt;
+  }
+
+  .figure-container {
+    text-align: center;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+
+  .figure-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+  }
+
+  .figure-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 9pt;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    font-family: 'Inter', sans-serif;
+    background: var(--section-bg);
+    font-weight: 600;
+    text-align: left;
+    padding: 5px 8px;
+    border: 1px solid var(--border);
+    font-size: 9.5pt;
+  }
+
+  td {
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .toc {
+    background: var(--light-bg);
+    padding: 10px 18px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+  }
+
+  .toc ol { padding-left: 18px; }
+  .toc li { font-family: 'Inter', sans-serif; font-size: 9.5pt; margin: 2px 0; }
+
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { padding: 0; }
+    .page-break { page-break-before: always; }
+    h2 { page-break-after: avoid; }
+    .qa-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Capitulo 6: Computacion de reservorio estructurado</h1>
+<p class="subtitle">Guia de estudio y preparacion para evaluacion</p>
+
+<div class="toc">
+  <ol>
+    <li>Conceptos clave con analogias</li>
+    <li>Arquitectura: que cambia y que se mantiene</li>
+    <li>Resultados experimentales</li>
+    <li>Interpretacion de figuras clave</li>
+    <li>Preguntas de evaluacion: fundamentos</li>
+    <li>Preguntas de evaluacion: estabilidad y NNLS</li>
+    <li>Preguntas de evaluacion: diseno experimental</li>
+    <li>Preguntas de evaluacion: optimizacion y espacios</li>
+    <li>Puntos criticos y frases de respuesta</li>
+  </ol>
+</div>
+
+
+<!-- ============================================================ -->
+<h2>1. Conceptos clave con analogias</h2>
+<!-- ============================================================ -->
+
+<div class="concept-box">
+  <div class="title">Las 3 matrices del reservorio (W_in, W_res, W_out)</div>
+  <p>El reservorio funciona como una fabrica con 3 etapas:</p>
+<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 8px; border-radius: 4px; margin: 8px 0;">
+   ENTRADA          FABRICA (150 maquinas)           SALIDA
+   -------          ----------------------           ------
+   u_t  -->  W_in  -->  h_t (procesado) -->  W_out  -->  y_t+1
+                         |          |
+                         +-- W_res --+  (las maquinas se hablan entre si)
+</pre>
+  <table>
+    <tr><th>Matriz</th><th>Tamano</th><th>Se entrena</th><th>Que hace</th></tr>
+    <tr><td>W_in</td><td>150 x 1</td><td>No, fija</td><td>Puerta de entrada. Toma el unico dato de la semana (alfa_t) y lo reparte entre las 150 neuronas. Como 1 manguera repartida en 150 cubetas.</td></tr>
+    <tr><td>W_res</td><td>150 x 150</td><td>No, fija</td><td>Conexiones internas. Define como las neuronas se hablan entre si. Como 150 personas en un salon: W_res dice quien le habla a quien y con que fuerza.</td></tr>
+    <tr><td>W_out</td><td>1 x 150</td><td>Si (NNLS)</td><td>Capa de lectura. Asigna un peso de importancia a cada neurona para la prediccion. Es la UNICA parte que se optimiza.</td></tr>
+  </table>
+  <div class="analogy">Imagina que tiras una piedra a un estanque. Las ondas codifican informacion sobre la piedra (tamano, velocidad, angulo). No necesitas disenar el estanque, solo aprender a leer las ondas. El estanque es el reservorio. Las ondas son h_t. La lectura es W_out.</div>
+</div>
+
+<div class="concept-box">
+  <div class="title">Que son u, h e y</div>
+  <table>
+    <tr><th>Simbolo</th><th>Que es</th><th>Ejemplo</th></tr>
+    <tr><td>u_t</td><td>La entrada: el valor de alfa_t (tasa de cambio TCROC) de esa semana</td><td>"El diesel subio 0.3%" = u_t = 0.003</td></tr>
+    <tr><td>h_t</td><td>El estado interno: un vector de 150 numeros que representa lo que el reservorio "recuerda" en la semana t</td><td>h_t = [0.23, -0.45, 0.87, ..., 0.34]</td></tr>
+    <tr><td>y_t+1</td><td>La prediccion: el precio pronosticado para la proxima semana</td><td>y = 89.50 Lempiras</td></tr>
+  </table>
+</div>
+
+<div class="concept-box">
+  <div class="title">La tanh (tangente hiperbolica)</div>
+  <p>Funcion que aplasta cualquier numero al rango [-1, +1]:</p>
+<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 8px; border-radius: 4px; margin: 8px 0;">
+    +1 - - - - - - - - - - - - -
+                         ........
+                    ....
+                  ..
+     0 - - - -.- - - - - - - - -
+             ..
+           ..
+      ....
+    ......
+    -1 - - - - - - - - - - - - -
+</pre>
+  <p>Se usa por 3 razones:</p>
+  <p>1. Acota los valores. Sin tanh, los numeros podrian explotar al multiplicarse repetidamente por W_res. La tanh los mantiene siempre entre -1 y +1.</p>
+  <p>2. Introduce no-linealidad. Sin ella, multiplicar matrices una y otra vez da resultado lineal. La tanh permite capturar relaciones curvas (la curvatura de la Figura 6.13).</p>
+  <p>3. Es Lipschitz con constante 1. Significa que |tanh(a) - tanh(b)| <= |a - b|. Nunca amplifica diferencias, solo las reduce. Esto es lo que garantiza la ESP.</p>
+  <table>
+    <tr><th>Funcion</th><th>Sirve</th><th>Problema</th></tr>
+    <tr><td>tanh</td><td>Si</td><td>La estandar. Rango [-1, +1], Lipschitz = 1</td></tr>
+    <tr><td>sigmoid</td><td>Si</td><td>Funcionaria, pero rango [0, 1], pierde valores negativos</td></tr>
+    <tr><td>ReLU</td><td>No</td><td>No acota por arriba, puede explotar</td></tr>
+    <tr><td>Identidad (lineal)</td><td>Parcial</td><td>Sin no-linealidad, SE REDUCE al modelo Markoviano</td></tr>
+  </table>
+  <div class="key-point">En el Teorema de Inclusion, cuando pones sigma = identidad (sin tanh), el SSRC se degrada exactamente al TCROC-Markov. La tanh es literalmente la fuente de la ganancia del 20-23%.</div>
+</div>
+
+<div class="concept-box">
+  <div class="title">Propiedad de estado de eco (ESP)</div>
+  <p>Garantia de que el reservorio "olvida" de donde empezo. No importa la condicion inicial h_0; despues de unos pasos la salida depende SOLO de los datos de entrada.</p>
+<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 6px; border-radius: 4px; margin: 6px 0;">
+Sin ESP:  El color final del agua depende de si el vaso tenia agua
+          limpia o sucia ANTES. El resultado cambia segun como
+          inicializaste. MALO.
+
+Con ESP:  No importa si el vaso tenia agua limpia o sucia.
+          Despues de remover bastante, el color depende SOLO
+          de cuanta tinta echaste. Resultado reproducible. BUENO.
+</pre>
+  <p>Formalmente: para cualesquiera dos condiciones iniciales h_0 y h'_0, la diferencia ||h_t - h'_t|| tiende a 0 cuando t tiende a infinito.</p>
+  <p>Se garantiza con una condicion simple: rho(W_res) menor que 1. Esto hace que la influencia de h_0 decaiga exponencialmente. Los rho optimos en la tesis son 0.70-0.85, bien por debajo de 1.</p>
+  <div class="analogy">Dos personas entran a un rio por puntos distintos. Si la corriente es fuerte (rho menor que 1), ambas terminan siguiendo el mismo cauce. El punto de entrada ya no importa.</div>
+</div>
+
+<div class="concept-box">
+  <div class="title">Leaky-ESN (integracion de fuga)</div>
+  <p>ESN con memoria controlable. En vez de reaccionar 100% al dato nuevo, el reservorio mezcla lo nuevo con su estado anterior:</p>
+<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 6px; border-radius: 4px; margin: 6px 0;">
+ESN estandar:   h_t =         tanh(W_in * u_t + W_res * h_{t-1})
+
+Leaky-ESN:      h_t = (1-a) * h_{t-1}  +  a * tanh(W_in * u_t + W_res * h_{t-1})
+                       --------------      ---------------------------------------
+                       "lo que recuerdo"    "lo nuevo que proceso"
+</pre>
+  <table>
+    <tr><th>Valor de a</th><th>Comportamiento</th><th>Analogia</th></tr>
+    <tr><td>a = 1.0</td><td>ESN estandar. 100% reaccion nueva</td><td>Espejo: refleja solo lo que tiene enfrente AHORA</td></tr>
+    <tr><td>a = 0.5</td><td>Mitad memoria, mitad nuevo</td><td>Promedio movil: suaviza</td></tr>
+    <tr><td>a = 0.1</td><td>90% memoria, 10% nuevo</td><td>Tanque grande: cambios graduales</td></tr>
+  </table>
+  <div class="key-point">
+    En la tesis: Regular a*=0.1 (90% memoria), Diesel a*=0.1 (90% memoria), Super a*=0.3 (70% memoria), Kerosene a*=1.0 (ESN puro, mercado mas volatil).
+  </div>
+</div>
+
+<div class="concept-box">
+  <div class="title">SSRC (Computador de reservorio estructurado estocastico)</div>
+  <p>La version especifica de la tesis. Combina activacion tanh, matrices aleatorias (de ahi lo "estocastico"), y capa de lectura por NNLS. Tres hiperparametros: dimension D, radio espectral rho y factor de fuga a. El termino fue propuesto por Banegas y Vides (2025).</p>
+</div>
+
+<div class="concept-box">
+  <div class="title">Teorema de inclusion: TCROC-Markov como caso particular</div>
+  <p>Resultado central del capitulo. Si en el SSRC fijamos la matriz del reservorio en cero, la activacion en identidad y la fuga en 1, recuperamos exactamente el modelo Markoviano del capitulo anterior:</p>
+<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: white; padding: 6px; border-radius: 4px; margin: 6px 0;">
+TCROC-Markov  C  TCROC-SSRC
+(caso particular)   (caso general)
+</pre>
+  <p>Es una identidad algebraica verificada con error 0.0 en las cuatro series. No 0.00001, no 10^{-15}... cero exacto.</p>
+  <div class="analogy">Un cuadrado es un caso particular de un rectangulo. TCROC-Markov es el SSRC "plano", sin curvatura no lineal. Al activar la curvatura (tanh, rho mayor que 0), ganamos expresividad.</div>
+</div>
+
+<div class="concept-box">
+  <div class="title">Aproximacion universal</div>
+  <p>El teorema de Grigoryeva y Ortega (2018): los reservorios con ESP pueden aproximar cualquier funcional causal continuo sobre secuencias. Cualquier relacion razonable entre historial de precios y precio futuro, el reservorio la puede aprender con suficientes neuronas.</p>
+  <div class="analogy">Con suficientes polinomios puedes aproximar cualquier curva suave (Weierstrass). Pero esto es para secuencias en vez de funciones estaticas. El reservorio es el "polinomio" del mundo de las series temporales.</div>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break">2. Arquitectura: que cambia respecto al modelo anterior</h2>
+<!-- ============================================================ -->
+
+<div class="figure-container">
+  <img src="figures/01_architecture_diagram.png" alt="Comparacion de arquitecturas">
+  <p class="figure-caption">Figura 6.1. Los pasos 1-2 (extraccion TCROC) y 4 (estimacion NNLS) son identicos. La diferencia esta en el paso 3: K-Means discreto vs reservorio recurrente continuo.</p>
+</div>
+
+<p>Los dos marcos comparten la fase inicial (extraer alfa_t de la serie de precios) y la fase final (estimar pesos por NNLS). Lo que cambia es el paso intermedio: el modelo Markoviano discretiza alfa_t en estados (bajista, estable, alcista) mediante K-Means, mientras que el SSRC lo proyecta a un espacio continuo de alta dimension mediante el reservorio.</p>
+
+<p>La ventaja: el reservorio retiene memoria continua de las ultimas semanas en su vector de estado, lo que le permite distinguir no solo en que regimen esta el mercado, sino como llego ahi. El modelo Markoviano no puede hacer eso porque al discretizar pierde la trayectoria.</p>
+
+<div class="figure-container">
+  <img src="figures/02_inclusion_theorem.png" alt="Verificacion del teorema de inclusion">
+  <p class="figure-caption">Figura 6.2. Verificacion numerica del teorema de inclusion. Diferencia maxima entre TCROC-Markov y SSRC degenerado: exactamente 0.0 para las cuatro series.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break">3. Resultados experimentales</h2>
+<!-- ============================================================ -->
+
+<h3>3.1 Verificaciones teoricas</h3>
+
+<p>Antes de evaluar predicciones, hay que verificar que las condiciones matematicas se cumplen. Las cuatro series satisfacen la ESP y la condicion de rango completo.</p>
+
+<div class="figure-container">
+  <img src="figures/04_eigenvalues_complex_plane.png" alt="Autovalores en el plano complejo">
+  <p class="figure-caption">Figura 6.4. Autovalores de W_res dentro del circulo unitario (linea negra). Radios optimos moderados (0.70 a 0.85).</p>
+</div>
+
+<div class="figure-container">
+  <img src="figures/11_washout_convergence.png" alt="Convergencia del washout">
+  <p class="figure-caption">Figura 6.8. El RMSE se estabiliza desde 10-20 pasos de washout. Se uso 50 por margen de seguridad.</p>
+</div>
+
+<h3>3.2 Optimizacion de hiperparametros</h3>
+
+<div class="figure-container">
+  <img src="figures/03_grid_heatmap.png" alt="Busqueda en grilla">
+  <p class="figure-caption">Figura 6.3. Mapas de calor del RMSE en la grilla (D, rho). Recuadro negro = configuracion optima.</p>
+</div>
+
+<table>
+  <tr><th>Serie</th><th>D*</th><th>rho*</th><th>a*</th><th>RMSE SSRC</th><th>RMSE Markov</th><th>Mejora</th></tr>
+  <tr><td>Regular</td><td>150</td><td>0.85</td><td>0.1</td><td>0.660</td><td>0.839</td><td>-21.4%</td></tr>
+  <tr><td>Super</td><td>150</td><td>0.70</td><td>0.3</td><td>0.781</td><td>0.977</td><td>-20.1%</td></tr>
+  <tr><td>Diesel</td><td>150</td><td>0.80</td><td>0.1</td><td>0.830</td><td>1.082</td><td>-23.3%</td></tr>
+  <tr><td>Kerosene</td><td>60</td><td>0.70</td><td>1.0</td><td>0.916</td><td>1.171</td><td>-21.8%</td></tr>
+</table>
+
+<p>Regular y Diesel optimizan con a = 0.1 (mucha inercia, filtro lento). Super con a = 0.3. Kerosene con a = 1.0 (sin inercia, ESN pura), coherente con su mayor volatilidad y sus 5 regimenes.</p>
+
+<h3>3.3 Predicciones vs precios reales</h3>
+
+<div class="figure-container">
+  <img src="figures/06_predictions_real_vs_models.png" alt="Predicciones vs real">
+  <p class="figure-caption">Figura 6.6. El SSRC (naranja) sigue mejor los puntos de inflexion que el modelo Markoviano (verde).</p>
+</div>
+
+<div class="figure-container">
+  <img src="figures/12_comparison_barplot.png" alt="Comparacion de barras">
+  <p class="figure-caption">Figura 6.11. Mejora consistente del 20-23% en las cuatro series.</p>
+</div>
+
+<div class="figure-container">
+  <img src="figures/07_boxplot_realizations.png" alt="Boxplot de realizaciones">
+  <p class="figure-caption">Figura 6.7. Las 30 realizaciones del SSRC quedan TODAS por debajo del benchmark Markoviano (linea punteada). Cajas estrechas = robustez.</p>
+</div>
+
+<h3>3.4 Sensibilidad</h3>
+
+<div class="figure-container">
+  <img src="figures/08_sensitivity_D.png" alt="Sensibilidad a D">
+  <p class="figure-caption">Figura 6.8. La diferencia entre D=20 y D=150 es menor al 0.5%. La ganancia se satura rapido.</p>
+</div>
+
+<div class="figure-container">
+  <img src="figures/09_sensitivity_rho.png" alt="Sensibilidad a rho">
+  <p class="figure-caption">Figura 6.9. Mas memoria (rho alto) no beneficia. Valores optimos moderados.</p>
+</div>
+
+<div class="figure-container">
+  <img src="figures/10_perturbation_bound.png" alt="Cota de perturbacion">
+  <p class="figure-caption">Figura 6.10. Cota teorica sobreestima la inestabilidad real por varios ordenes de magnitud.</p>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break">4. Interpretacion de figuras clave</h2>
+<!-- ============================================================ -->
+
+<p>Estas dos figuras responden a una pregunta central: ¿el reservorio (SSRC) "entiende" los regimenes economicos que K-Means encontro? La respuesta es si, y estas figuras lo demuestran visualmente.</p>
+
+
+<h3>4.1 Figura 6.12: Proyeccion PCA de los estados del reservorio</h3>
+
+<div class="figure-container">
+  <img src="figures/05_reservoir_states_by_regime.png" alt="PCA estados del reservorio">
+  <p class="figure-caption">Figura 6.12. Proyeccion PCA de h_t coloreada por regimenes de K-Means. Cuatro paneles, uno por combustible.</p>
+</div>
+
+<p>Cada punto es un instante de tiempo (una semana) de la serie de precios. Hay 4 paneles: Regular, Super, Diesel y Kerosene.</p>
+
+<h3>¿Que son los ejes?</h3>
+
+<table>
+  <tr><th>Eje</th><th>Significado</th></tr>
+  <tr><td>PC1 (eje X)</td><td>Primera componente principal del vector de estado h_t</td></tr>
+  <tr><td>PC2 (eje Y)</td><td>Segunda componente principal del vector de estado h_t</td></tr>
+</table>
+
+<p>El reservorio tiene D = 150 dimensiones (o 60 para Kerosene). PCA reduce esas dimensiones a solo 2 para poder visualizarlas. Es como tomar una foto de un objeto tridimensional desde el angulo que capta mas informacion.</p>
+
+<h3>¿Que significan los colores?</h3>
+
+<p>Los colores NO fueron asignados por el reservorio. Son los regimenes que K-Means identifico en el capitulo anterior:</p>
+
+<table>
+  <tr><th>Color</th><th>Regimen</th><th>Significado economico</th></tr>
+  <tr><td>Verde/Amarillo</td><td>Regimen 1</td><td>Caida de precios</td></tr>
+  <tr><td>Rojo</td><td>Regimen 2</td><td>Estabilidad / leve baja</td></tr>
+  <tr><td>Azul</td><td>Regimen 3</td><td>Alza moderada</td></tr>
+  <tr><td>Morado (si aplica)</td><td>Regimen 4-5</td><td>Alza fuerte</td></tr>
+</table>
+
+<h3>¿Como interpretar las formas?</h3>
+
+<div class="key-point">
+  Si los colores forman GRUPOS SEPARADOS, el reservorio "aprendio" los regimenes.<br>
+  Si los colores estan MEZCLADOS, el reservorio NO capto la estructura.
+</div>
+
+<p>Lo central: los puntos del mismo color se agrupan juntos y los de diferente color se separan. El reservorio, sin que nadie le dijera que regimen es cada semana, organizo internamente la informacion de forma que los regimenes quedan separados naturalmente.</p>
+
+<h3>Interpretacion punto por punto</h3>
+
+<p>1. Los clusters se separan geometricamente. Cada regimen ocupa una "zona" distinta del espacio. El reservorio codifica los regimenes en su representacion interna de alta dimension.</p>
+
+<p>2. Las trayectorias entre clusters son suaves (curvas, no saltos). Las transiciones entre regimenes se mapean como movimiento continuo y gradual, como si los precios "viajaran" suavemente de una zona a otra.</p>
+
+<p>3. Las formas curvadas (paraboloides, espirales) son la huella de la funcion tanh del reservorio. Esa no-linealidad es lo que da al SSRC su ventaja sobre el modelo Markoviano lineal: puede "doblar" el espacio para separar mejor los regimenes.</p>
+
+<p>4. Los puntos en la frontera entre dos colores son semanas de transicion, cuando el mercado estaba cambiando de un regimen a otro.</p>
+
+<div class="analogy">Imagina un dataset con 150 columnas (features) por semana. Haces PCA(n_components=2) y luego coloreas los puntos por una variable categorica que NO usaste para el PCA. Si ves clusters separados por color, tus 150 features capturan naturalmente esa categoria. Eso es exactamente lo que pasa aca.</div>
+
+
+<h3 class="page-break">4.2 Figura 6.13: Relacion alfa_t vs activacion promedio del reservorio</h3>
+
+<div class="figure-container">
+  <img src="figures/13_reservoir_regimes_scatter.png" alt="Alpha vs activacion">
+  <p class="figure-caption">Figura 6.13. Relacion entre retorno TCROC (alfa_t) y activacion promedio del reservorio, coloreada por regimenes.</p>
+</div>
+
+<p>Cada punto es una semana. Se grafican dos cosas directamente (sin PCA):</p>
+
+<table>
+  <tr><th>Eje</th><th>Significado</th></tr>
+  <tr><td>Eje X: alfa_t (retorno)</td><td>La tasa de cambio relativa calculada por TCROC. Es el "retorno" semanal del combustible.</td></tr>
+  <tr><td>Eje Y: h_t promedio (activacion)</td><td>El promedio de las 150 (o 60) neuronas del reservorio en esa semana.</td></tr>
+</table>
+
+<p>Los colores son los mismos regimenes de K-Means que en la Figura 6.12.</p>
+
+<h3>¿Como leer esta figura?</h3>
+
+<p>La pregunta que responde: ¿el reservorio reacciona de forma coherente a los cambios de precio? Para entender el patron, este es el esquema:</p>
+
+<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: var(--light-bg); padding: 10px; border-radius: 4px; margin: 10px 0;">
+   Activacion
+   del reservorio
+        |
+        |      ... Regimen 3 (Alza)      &lt;-- activacion POSITIVA
+        |    ...
+        |  ..
+   0 ---|---.-----------------------------&gt; alfa_t (retorno TCROC)
+        | ..
+        |... Regimen 1 (Caida)           &lt;-- activacion NEGATIVA
+        |.
+        v
+</pre>
+
+<h3>Los 3 hallazgos clave</h3>
+
+<p><strong>1. Relacion monotona (creciente).</strong> Cuando alfa_t es negativo (precio bajo), la activacion del reservorio es negativa. Cuando alfa_t es positivo (precio subio), la activacion es positiva. El reservorio preserva el orden dinamico: caida, estabilidad, alza.</p>
+
+<p><strong>2. Los colores se ordenan de izquierda a derecha.</strong> En el extremo izquierdo (alfa_t mas negativo): Regimen 1 (caida). En el centro (alfa_t cercano a 0): Regimen 2 (estabilidad). En el extremo derecho (alfa_t mas positivo): Regimenes 3-4 (alza). El reservorio entiende el orden de los regimenes, no solo los clasifica como categorias sin estructura.</p>
+
+<p><strong>3. La relacion es CURVA, no recta.</strong> Esta es la observacion mas importante desde la perspectiva matematica. Si la relacion fuera una linea recta, significaria que el reservorio no aporta nada, el modelo lineal (Markov) ya captaria todo. Pero la curvatura (forma de S o sigmoide) indica que el reservorio captura estructura no lineal que el Markoviano no puede representar.</p>
+
+<p>La curvatura viene de la funcion tanh() dentro del reservorio:</p>
+
+<pre style="font-family: 'Courier New', monospace; font-size: 10pt; background: var(--light-bg); padding: 8px; border-radius: 4px; margin: 8px 0;">
+h_t = (1-a) * h_{t-1} + a * tanh(W_in * alfa_t + W_res * h_{t-1})
+                              ^^^^
+                              Esta es la fuente de la curvatura
+</pre>
+
+<div class="key-point">
+  Diesel muestra la curvatura mas pronunciada (mayor beneficio de la extension no lineal).<br>
+  Kerosene tiene la dispersion mas amplia (mercado mas volatil, mas regimenes K=5).
+</div>
+
+
+<h3>4.3 Figura 6.14: Regimenes superpuestos a precios</h3>
+
+<div class="figure-container">
+  <img src="figures/14_reservoir_price_regimes.png" alt="Regimenes sobre precios">
+  <p class="figure-caption">Figura 6.14. Regimenes del SSRC superpuestos a la serie de precios original.</p>
+</div>
+
+<p>Los cambios de color de fondo coinciden con los puntos de inflexion del mercado (caida de 2020, recuperacion posterior). El SSRC mantiene la interpretabilidad economica de los regimenes a pesar de operar en un espacio continuo de alta dimension.</p>
+
+
+<h3>4.4 Resumen comparativo de las figuras</h3>
+
+<table>
+  <tr><th>Pregunta</th><th>Fig. 6.12 (PCA)</th><th>Fig. 6.13 (alfa_t vs activacion)</th></tr>
+  <tr><td>Que muestra</td><td>Los estados internos del reservorio en 2D</td><td>La relacion entrada-salida del reservorio</td></tr>
+  <tr><td>Que valida</td><td>Que los regimenes se separan naturalmente en el espacio del reservorio</td><td>Que la activacion es coherente con los retornos y regimenes</td></tr>
+  <tr><td>Por que importa</td><td>Confirma que el SSRC preserva interpretabilidad a pesar de la alta dimension</td><td>La no-linealidad (curvatura) es la fuente de la mejora del 20-23% en RMSE</td></tr>
+  <tr><td>Hallazgo clave</td><td>Clusters separados + trayectorias suaves</td><td>Relacion monotona + curvatura (no es recta)</td></tr>
+</table>
+
+<div class="analogy">En resumen: estas figuras demuestran que el reservorio, a pesar de operar en un espacio de 150 dimensiones sin informacion explicita de regimenes, organiza internamente los estados de forma que los regimenes quedan separados (Fig. 6.12). La relacion entre alfa_t y la activacion es monotona y no lineal (Fig. 6.13), confirmando que la extension SSRC captura estructura que el modelo Markoviano lineal no puede representar.</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break">5. Preguntas de evaluacion: fundamentos</h2>
+<!-- ============================================================ -->
+
+<div class="qa-block">
+  <p class="question">1. ¿Bajo que norma vectorial funciona la prueba de la ESP? ¿Que cambia con norma-2 vs norma-infinito?</p>
+  <div class="answer">
+    <p>Funciona bajo norma-2 (euclidiana). tanh es Lipschitz con constante 1 componente a componente, y eso se traduce en una cota con norma-2 para el vector completo. La transicion a convergencia exponencial usa la formula de Gelfand, que conecta la norma espectral (sigma_max) con el radio espectral (max |lambda_i|) de forma asintotica.</p>
+    <p>Con norma-infinito la prueba tambien funciona pero la cota sale mas holgada, porque ||W_res||_inf (suma maxima de fila) suele ser mayor que ||W_res||_2.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">2. ¿Un ejemplo de funcional sobre precios que el reservorio NO pueda aproximar?</p>
+  <div class="answer">
+    <p>El supremo historico: H({u_t}) = max de todos los u_s hasta t. Depende de toda la historia con igual peso; un cambio minusculo en una entrada lejana puede cambiar el resultado. No es continuo en la topologia del producto, y el teorema de aproximacion universal lo excluye.</p>
+    <p>En la practica no importa: la dinamica de combustibles tiene memoria finita. El mercado "olvida" shocks despues de cierto horizonte, asi que los funcionales relevantes si son continuos.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">3. ¿Por que no se exploraron radios espectrales mayores que 1?</p>
+  <div class="answer">
+    <p>Primero: con rho menor que 1, la ESP se verifica constructivamente; con rho mayor que 1 depende de la distribucion de entradas y no se puede verificar a priori. Segundo: la Figura 6.9 muestra que el RMSE sube al acercarse a 0.99, ir mas alla no tiene sentido. Tercero: combustibles hondurenos son mercado regulado con ajustes semanales pequenos; la senal no tiene la complejidad que justificaria operar al borde de la inestabilidad.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">4. K-Means es discontinua. ¿Como entra en la definicion del RC que usa activacion suave?</p>
+  <div class="answer">
+    <p>El Teorema 6.4 no dice que el caso degenerado sea un RC estandar con propiedades de suavidad. Dice que las ecuaciones del modelo Markoviano se recuperan algebraicamente al fijar ciertos parametros. La discontinuidad de K-Means queda encapsulada en W_in, mientras sigma = identidad (suave). Es una relacion de inclusion algebraica, no topologica.</p>
+    <div class="key-point">El Teorema 6.4 establece equivalencia de salidas, no equivalencia de propiedades de regularidad.</div>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">5. ESP instantanea implica cero memoria. ¿No contradice la motivacion del capitulo?</p>
+  <div class="answer">
+    <p>No. Hay que distinguir dos memorias: la del reservorio (h_t que depende de h_{t-1}; en el caso degenerado es cero) y la del operador TCROC (alfa_t que ya contiene un promedio ponderado de las ultimas W semanas). La motivacion del capitulo es agregar una segunda capa de memoria encima de la que alfa_t ya tiene. Cuando esa segunda capa es nula, se recupera el modelo anterior. Cuando se activa (a menor que 1, W_res distinto de cero), se obtiene la ganancia del 20-23%.</p>
+    <div class="analogy">El modelo anterior es un telescopio sin lente de aumento. El reservorio agrega una lente. Sin lente (caso degenerado), ves lo mismo. Con lente, ves mas detalle.</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break">6. Preguntas de evaluacion: estabilidad y NNLS</h2>
+<!-- ============================================================ -->
+
+<div class="qa-block">
+  <p class="question">6. Los numeros de condicion kappa(H) son del orden de 10^9. ¿Como se justifica la estabilidad?</p>
+  <div class="answer">
+    <p>kappa ~ 10^9 es preocupante en teoria. La justificacion viene de tres frentes.</p>
+    <p>Evidencia empirica: la Figura 6.7 muestra que las 30 realizaciones producen RMSE consistente. Si el condicionamiento causara problemas, habria outliers o dispersion alta.</p>
+    <p>Geometria de la restriccion: NNLS obliga w >= 0, eliminando el semiespacio negativo. En problemas mal condicionados sin restricciones, la solucion oscila entre valores positivos y negativos grandes. La no negatividad lo impide.</p>
+    <p>Ensemble: las 30 realizaciones tienen matrices aleatorias distintas con condicionamientos distintos. El promedio diluye el efecto particular de cada una.</p>
+    <div class="key-point">No hay cota formal cerrada para la regularizacion implicita del NNLS. Esto se reconoce como trabajo futuro.</div>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">7. En la cota de perturbacion, ¿la norma espectral y el radio espectral son lo mismo?</p>
+  <div class="answer">
+    <p>No. La norma espectral es sigma_max (mayor valor singular). El radio espectral es max |lambda_i| (mayor autovalor en modulo). Siempre rho(A) <= ||A||_2, con igualdad solo si la matriz es normal (AA* = A*A).</p>
+    <p>Paso a paso se necesita la norma espectral. En el resultado final aparece rho_res como simplificacion asintotica (via Gelfand). Es una cota ligeramente optimista paso a paso, pero el argumento de convergencia es valido.</p>
+    <div class="key-point">La cota exacta paso a paso deberia usar sigma_max en lugar de rho_res. La convergencia asintotica justifica la simplificacion.</div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<h2>7. Preguntas de evaluacion: diseno experimental</h2>
+<!-- ============================================================ -->
+
+<div class="qa-block">
+  <p class="question">8. Con 240 configuraciones evaluadas, ¿no hay riesgo de sobreajuste?</p>
+  <div class="answer">
+    <p>Se usa particion fija temporal (semanas 1-312 entrenamiento, 313+ test), no validacion cruzada. K-fold no aplica a series temporales porque mezcla futuro con pasado.</p>
+    <p>La grilla selecciona la mejor configuracion sobre 5 realizaciones (no 1), reduciendo varianza. Las 30 realizaciones finales son independientes de la seleccion. 240 configuraciones es modesto comparado con 390 datos.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">9. ¿Por que washout = 50 y no otro numero?</p>
+  <div class="answer">
+    <p>Teoria: con rho = 0.85 y precision de 10^{-6}, la convergencia toma unos 85 pasos. Pero lo que importa no es precision de maquina sino que el transitorio no afecte las predicciones.</p>
+    <p>Empiria (argumento mas fuerte): la Figura 6.8 muestra que el RMSE se estabiliza desde los 10-20 pasos. El valor de 50 es conservador. Con 20 bastaria. Practica estandar en la literatura (Lukosevicius y Jaeger, 2009).</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">10. ¿Por que Kerosene necesita solo D=60 mientras las demas usan D=150?</p>
+  <div class="answer">
+    <p>Estructura, no ruido. Kerosene tiene 5 regimenes pero su factor optimo es a = 1.0 (sin inercia). Con a = 1, el estado se sobreescribe por completo en cada paso, generando estados mas decorrelados. La matriz H tiene mejor condicionamiento con dimension menor.</p>
+    <p>Ademas, Kerosene es la serie mas volatil: alfa_t varia mas, generando estados mas diversos naturalmente. La Figura 6.8 lo confirma: la curva de Kerosene es la mas plana de las cuatro.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break">8. Preguntas de evaluacion: optimizacion y espacios</h2>
+<!-- ============================================================ -->
+
+<div class="qa-block">
+  <p class="question">11. ¿Cuales son las condiciones KKT del NNLS? ¿Cuantas componentes de w terminan activas?</p>
+  <div class="answer">
+    <p>Cuatro condiciones: estacionariedad (H(H'w* - y) = mu), factibilidad primal (w* >= 0), factibilidad dual (mu >= 0), y complementariedad (mu_i * w*_i = 0).</p>
+    <p>La complementariedad dice: si w*_i es positiva (activa), su multiplicador mu_i es cero. Si w*_i es cero (inactiva), el multiplicador puede ser positivo.</p>
+    <p>Con D=150, solo unas 30-50 componentes son activas. La dimension efectiva del modelo es mucho menor que 150. NNLS funciona como selector automatico de features, una regularizacion L0 implicita sin parametro de penalizacion.</p>
+    <div class="key-point">Esto explica por que D=20 y D=150 dan RMSE casi identico: las features utiles son pocas independientemente de cuantas ofrezca el reservorio.</div>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">12. ¿Por que NNLS y no Ridge Regression (Tikhonov), que es lo estandar en reservorios?</p>
+  <div class="answer">
+    <p>Tikhonov controla la norma de w con un parametro lambda. NNLS restringe w al ortante positivo. Tres ventajas de NNLS:</p>
+    <p>Interpretabilidad: el pronostico es combinacion positiva de estados del reservorio. Componentes negativas en W_out significarian que ciertos filtros "cancelan" la prediccion, sin sentido para precios positivos.</p>
+    <p>Sin hiperparametro extra: Tikhonov agrega lambda al espacio de busqueda ya grande.</p>
+    <p>Consistencia: los capitulos 2 a 5 usan NNLS. La Tabla 6.2 muestra que NNLS supera a Ridge en las cuatro series.</p>
+    <div class="key-point">NNLS es equivalente a Tikhonov con lambda = 0 y la restriccion w >= 0. Es regularizacion geometrica en vez de parametrica.</div>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">13. ¿Que algoritmo resuelve el NNLS? ¿Converge en tiempo finito?</p>
+  <div class="answer">
+    <p>Lawson-Hanson (1974), implementado en scipy.optimize.nnls. Converge en un numero finito de iteraciones (a lo sumo D). Es metodo de pivoteo, no iterativo como gradiente descendente. Con D=150, cada llamada toma milisegundos.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">14. Los estados h_t viven en R^D con tanh. ¿La imagen forma una variedad? ¿De que dimension?</p>
+  <div class="answer">
+    <p>Con a = 1, la imagen esta en (-1,1)^D. Con a menor que 1, subconjunto compacto de R^D.</p>
+    <p>La entrada es escalar (alfa_t en R), asi que la trayectoria {h_t} esta confinada a una variedad de dimension mucho menor que D. Las proyecciones PCA de la Figura 6.12 lo confirman: 2 componentes capturan la mayor parte de la varianza. La variedad intrinseca tiene dimension ~2-3, coherente con K=3-5 regimenes.</p>
+    <p>La alta dimension D no es porque la senal sea compleja; es para que la capa de lectura lineal pueda separar la estructura.</p>
+    <div class="analogy">Datos en 2D que no son linealmente separables, proyectados a 100 dimensiones donde si lo son. El truco del kernel, pero con dinamica temporal.</div>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">15. El teorema de aproximacion universal opera sobre U^{Z_-}. ¿Es completo este espacio? ¿Importa?</p>
+  <div class="answer">
+    <p>Con topologia del producto: completo (U compacto), compacto (Tychonoff), metrisable (Z_- numerable). La compacidad es condicion necesaria del teorema. Un funcional continuo sobre espacio compacto es uniformemente continuo (Heine-Cantor), y eso permite la aproximacion uniforme.</p>
+    <p>En nuestro caso, U es compacto porque alfa_t tiene rango finito (precios regulados). La condicion se cumple sin suposiciones artificiales.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">16. ¿Se puede ver el reservorio como operador en un espacio de Banach? ¿Que propiedades tiene?</p>
+  <div class="answer">
+    <p>Si. Define un operador T: l^inf(Z_-, R^d) a l^inf(Z_-, R^m). Propiedades: causal (y_t depende solo de entradas pasadas), invariante en el tiempo, acotado (tanh acotada), Lipschitz con constante ||W_out|| ||W_in|| / (1 - rho), y no lineal.</p>
+    <p>El teorema de aproximacion universal dice que el conjunto de estos operadores T es denso en el espacio de operadores causales, invariantes y continuos.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">17. La unicidad de W_out requiere rango(H) = D. Con ruido numerico, ¿como garantizarlo?</p>
+  <div class="answer">
+    <p>Genericamente: el conjunto de matrices (W_in, W_res) con rango(H) menor que D tiene medida de Lebesgue cero. Con probabilidad 1, rango = D.</p>
+    <p>En la practica, el rango numerico podria ser menor. Con kappa ~ 10^9, perturbacion de 10^{-6} en datos podria dar perturbacion de 10^3 en w. La restriccion w >= 0 previene que esa amplificacion se manifieste. Los resultados empiricos muestran baja variabilidad entre realizaciones.</p>
+  </div>
+</div>
+
+<div class="qa-block">
+  <p class="question">18. La ESP dice ||h_t - h'_t|| tiende a 0. ¿Es convergencia fuerte o debil?</p>
+  <div class="answer">
+    <p>En R^D (dimension finita), todas las normas son equivalentes. Convergencia fuerte = debil = por componentes. La distincion no aplica.</p>
+    <p>En dimension infinita (kernels de reservorio) si importa: fuerte implica debil pero no al reves. Los resultados de Grigoryeva y Ortega requieren ESP en sentido fuerte, que es lo que la tesis usa.</p>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<h2 class="page-break">9. Puntos criticos y frases de respuesta</h2>
+<!-- ============================================================ -->
+
+<h3>Los 5 temas de mayor riesgo</h3>
+
+<table>
+  <tr><th>#</th><th>Tema</th><th>Riesgo</th><th>Respuesta</th></tr>
+  <tr><td>6</td><td>kappa(H) ~ 10^9 sin cota formal para NNLS</td><td>Alto</td><td>30 realizaciones estables + ortante positivo. Reconocer como trabajo futuro.</td></tr>
+  <tr><td>12</td><td>NNLS vs Tikhonov</td><td>Alto</td><td>Geometria del cono, interpretabilidad, sin hiperparametro extra, consistencia.</td></tr>
+  <tr><td>7</td><td>Norma espectral vs radio espectral</td><td>Medio</td><td>La cota usa simplificacion asintotica. Tener version con sigma_max lista.</td></tr>
+  <tr><td>11</td><td>KKT y componentes activas</td><td>Medio</td><td>Solo 30-50 de 150 son activas. NNLS = selector implicito.</td></tr>
+  <tr><td>17</td><td>Rango numerico vs exacto</td><td>Medio</td><td>Genericidad (medida cero). Restriccion w >= 0 amortigua.</td></tr>
+</table>
+
+<h3>Frases de respuesta</h3>
+
+<p>"El Teorema 6.4 establece una relacion de inclusion algebraica, no topologica."</p>
+<p>"La restriccion de no negatividad restringe la solucion al ortante positivo, actuando como regularizacion geometrica."</p>
+<p>"La compacidad de U es condicion necesaria del Teorema 6.3, y se satisface naturalmente por la regulacion del mercado."</p>
+<p>"Los estados del reservorio viven en una variedad de baja dimension intrinseca embebida en R^D."</p>
+<p>"La convergencia es asintotica por Gelfand; la cota paso a paso requiere la norma espectral, no el radio."</p>
+<p>"NNLS es equivalente a Tikhonov con lambda cero y la restriccion adicional w mayor o igual que cero."</p>
+
+<h3>Ante preguntas dificiles</h3>
+
+<p>Si la pregunta toca un punto sin respuesta exacta, reformular en terminos de operadores o geometria convexa. Reconocer limitaciones con propuestas de trabajo futuro siempre es mejor que intentar justificar algo que no se sostiene.</p>
+
+</body>
+</html>
